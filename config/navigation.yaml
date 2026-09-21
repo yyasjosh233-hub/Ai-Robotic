@@ -1,0 +1,13 @@
+# PAI-IR Navigation & Nav2 Configuration
+
+nav2:
+  planner_plugin: "NavfnPlanner"
+  controller_plugin: "DWBLocalPlanner"
+  map_resolution: 0.05 # meters per pixel
+
+human_aware_nav:
+  human_safety_zone_radius: 1.5 # meters
+  warning_zone_radius: 2.5 # meters
+  slowdown_velocity_factor: 0.4
+  dynamic_replanning_interval_s: 0.2
+  follow_mode_distance: 1.8 # meters

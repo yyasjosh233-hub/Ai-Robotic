@@ -1,0 +1,19 @@
+# PAI-IR Independent Safety Layer Configuration
+
+safety_limits:
+  max_linear_speed_m_s: 1.2
+  max_arm_speed_deg_s: 45.0
+  min_human_distance_m: 0.8
+  emergency_stop_deceleration_m_s2: 5.0
+  workspace_bounds:
+    x_min: -15.0
+    x_max: 15.0
+    y_min: -15.0
+    y_max: 15.0
+    z_min: 0.0
+    z_max: 3.5
+
+hardware_e_stop:
+  enabled: true
+  override_ai: true
+  heartbeat_timeout_ms: 500

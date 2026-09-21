@@ -1,0 +1,15 @@
+# PAI-IR Camera & Vision Configuration
+
+camera:
+  device_id: 0
+  width: 1280
+  height: 720
+  fps: 30
+  mode: "SIMULATION" # SIMULATION | WEBCAM | REAL_SENSE | STEREO
+
+perception:
+  person_detector: "yolo_v8_mock"
+  pose_estimator: "mediapipe_mock"
+  gesture_recognizer: "spatial_hands"
+  tracking_algorithm: "bytetrack"
+  min_detection_confidence: 0.75

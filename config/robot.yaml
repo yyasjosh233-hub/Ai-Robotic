@@ -1,0 +1,32 @@
+# PAI-IR Robot Hardware & Kinematics Configuration
+
+amr:
+  type: "differential_drive"
+  wheel_radius: 0.1 # meters
+  wheel_base: 0.45 # meters
+  max_linear_velocity: 1.5 # m/s
+  max_angular_velocity: 2.0 # rad/s
+  footprint_radius: 0.4 # meters
+
+manipulator:
+  type: "industrial_arm_6dof"
+  dof: 6
+  joint_limits:
+    j1: [-3.14, 3.14]
+    j2: [-1.57, 1.57]
+    j3: [-2.80, 2.80]
+    j4: [-3.14, 3.14]
+    j5: [-1.57, 1.57]
+    j6: [-6.28, 6.28]
+  max_payload_kg: 5.0
+  end_effector: "parallel_gripper"
+
+sensors:
+  lidar:
+    range_max: 25.0 # meters
+    scan_frequency_hz: 15
+  camera:
+    fps: 30
+    resolution: [1920, 1080]
+  imu:
+    update_rate_hz: 100

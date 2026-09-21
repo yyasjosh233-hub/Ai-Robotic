@@ -1,0 +1,32 @@
+# PAI-IR AI Engine Configuration
+
+vlm_llm:
+  provider: "mock_adapter" # mock_adapter | openai | gemini | local_ollama | isaac_ros
+  model_name: "pai-vlm-v1"
+  temperature: 0.2
+  max_tokens: 1024
+
+hri:
+  stt_provider: "local_whisper_mock"
+  tts_provider: "web_speech_api"
+  confidence_threshold: 0.85
+  gesture_sensitivity: 0.90
+
+intent:
+  supported_intents:
+    - GREETING
+    - HELP
+    - STOP
+    - COME_HERE
+    - FOLLOW_ME
+    - GO_TO
+    - INSPECT
+    - PICK
+    - PLACE
+    - SEARCH
+    - REPORT
+    - STATUS
+    - CANCEL
+    - CONFIRM
+    - REJECT
+    - EMERGENCY
