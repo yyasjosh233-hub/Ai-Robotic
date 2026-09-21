@@ -105,6 +105,22 @@ export const servicesData = techSpectrumData
 
 export const illustrationsData = [
   {
+    id: 301,
+    title: 'ROBOCORP 25 — Master 25-Robot Autonomous Roster Infographic Grid',
+    category: 'Smart Factory',
+    spec: '25 Primary Robots · 25 Autonomous Roles · Executive, Production, QA, Maintenance, AMR, R&D',
+    description: 'Comprehensive 5x5 master infographic layout showcasing the 25 primary robots operating across Executive Command, Production Deck, Quality QA, Predictive Maintenance, Logistics AMRs, and Customer Operations.',
+    image: '/assets/robocorp25_master_grid_infographic.jpg'
+  },
+  {
+    id: 302,
+    title: 'R08 Component Installation Robot — 13-Panel Precision Robotics Telemetry UI',
+    category: 'Industrial Automation',
+    spec: '3D Motion Planning · Sub-mm Insertion (0.08mm) · Real-Time Force Feedback (2.31N)',
+    description: 'Full 13-panel autonomous manufacturing ecosystem UI for Component Installation Robot R08, featuring AI camera vision, 3D trajectory collision check, safety verification, and human approval workflow.',
+    image: '/assets/robocorp_r08_component_installation_ui.jpg'
+  },
+  {
     id: 201,
     title: 'AMR Warehouse Waypoint Navigation & Path Planner',
     category: 'Autonomous Mobile Robots (AMR)',
