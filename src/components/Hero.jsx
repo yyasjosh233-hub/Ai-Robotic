@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import { Cpu, Bot, Zap, ShieldCheck, Activity, ArrowRight, Sparkles, Sliders, CheckCircle2 } from 'lucide-react'
 
 export default function Hero({ onOpenPlatform, onExplore }) {
-  // Hero View Toggle State ('dashboard' or 'roster')
-  const [heroView, setHeroView] = useState('dashboard')
+  // Neural Core Monitor State
   const [latencySpeed, setLatencySpeed] = useState(12)
   const [payloadRate, setPayloadRate] = useState(45.2)
   const [subsystems, setSubsystems] = useState({
@@ -76,48 +75,15 @@ export default function Hero({ onOpenPlatform, onExplore }) {
         {/* Hero Visual Card & Neural Core Telemetry HUD */}
         <div className="mt-14 relative max-w-5xl mx-auto">
           <div className="relative rounded-2xl overflow-hidden glass-panel border border-cyan-500/30 p-2 shadow-2xl">
-            
-            {/* High-Tech Header Control Bar */}
-            <div className="bg-slate-950/90 px-4 py-2 border-b border-slate-800/80 flex items-center justify-between font-mono text-xs text-slate-300 mb-1 rounded-t-xl">
-              <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping" />
-                <span className="font-bold text-cyan-300 uppercase tracking-widest">ROBOCORP 25 · AUTONOMOUS ECOSYSTEM FEED</span>
-              </div>
-
-              {/* View Switcher Buttons */}
-              <div className="flex items-center gap-1.5 bg-slate-900/90 p-1 rounded-lg border border-slate-800">
-                <button
-                  onClick={() => setHeroView('dashboard')}
-                  className={`px-3 py-1 rounded text-[11px] transition-all font-semibold ${
-                    heroView === 'dashboard'
-                      ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/50'
-                      : 'text-slate-400 hover:text-white'
-                  }`}
-                >
-                  R08 Component Dashboard
-                </button>
-                <button
-                  onClick={() => setHeroView('roster')}
-                  className={`px-3 py-1 rounded text-[11px] transition-all font-semibold ${
-                    heroView === 'roster'
-                      ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/50'
-                      : 'text-slate-400 hover:text-white'
-                  }`}
-                >
-                  25-Robot Master Grid
-                </button>
-              </div>
-            </div>
-
             <div className="relative rounded-xl overflow-hidden aspect-[16/9] max-h-[460px] bg-slate-950 flex items-center justify-center">
               
               <img
-                src={heroView === 'dashboard' ? '/assets/robocorp25_dashboard.jpg' : '/assets/robocorp25_master_bg.jpg'}
-                alt="ROBOCORP 25 Autonomous Manufacturing System"
-                className="w-full h-full object-cover opacity-95 hover:scale-105 transition-all duration-700"
+                src="/assets/orange_robotic_arms_factory-BnlkxGTJ.png"
+                alt="DJ Group Precision Robotic System"
+                className="w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-700"
               />
 
-              <div className="absolute inset-0 bg-gradient-to-t from-[#070b14] via-transparent to-transparent opacity-75" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#070b14] via-transparent to-transparent opacity-85" />
               
               {/* Neural Core HUD Top Left */}
               <div className="absolute top-4 left-4 p-3 rounded-xl bg-slate-900/90 backdrop-blur-md border border-cyan-500/40 text-xs font-mono space-y-1.5 shadow-xl">

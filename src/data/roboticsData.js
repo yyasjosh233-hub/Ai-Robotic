@@ -6,7 +6,7 @@ export const techSpectrumData = [
     category: 'Industrial Automation',
     description: 'Automated machines used in factories. They perform tasks like welding, painting, assembly, packaging, and material handling with high precision and speed.',
     spec: 'Payload: Up to 500kg | Precision: ±0.02mm',
-    image: '/assets/robocorp25_dashboard.jpg',
+    image: '/assets/orange_robotic_arms_factory-BnlkxGTJ.png',
     badge: 'Heavy Industrial'
   },
   {

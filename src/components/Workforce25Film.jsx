@@ -40,6 +40,7 @@ export default function Workforce25Film() {
   const [isPlaying, setIsPlaying] = useState(true)
   const [progress, setProgress] = useState(0)
   const [showInspectorModal, setShowInspectorModal] = useState(false)
+  const [showMasterGridModal, setShowMasterGridModal] = useState(false)
   const [filterCategory, setFilterCategory] = useState('All')
 
   // 15-Shot Storyboard matching prompt sequence
@@ -103,6 +104,41 @@ export default function Workforce25Film() {
           <p className="text-xs text-slate-400 font-mono tracking-widest uppercase">
             AUTOMATE TODAY · A SMARTER TOMORROW
           </p>
+        </div>
+
+        {/* Master Infographic Grid Showcase Poster */}
+        <div className="relative rounded-2xl overflow-hidden glass-panel border border-cyan-500/40 shadow-2xl bg-slate-950 group">
+          <div className="p-4 bg-slate-950/90 border-b border-slate-800/80 flex flex-wrap items-center justify-between gap-3 font-mono text-xs">
+            <div className="flex items-center gap-2 text-cyan-300">
+              <Sparkles className="w-4 h-4 text-cyan-400 animate-spin-slow" />
+              <span className="font-extrabold uppercase tracking-wider text-sm text-white">ROBOCORP 25 · MASTER ENTERPRISE INFOGRAPHIC GRID</span>
+            </div>
+            <button
+              onClick={() => setShowMasterGridModal(true)}
+              className="px-3.5 py-1.5 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/40 flex items-center gap-2 transition-all text-xs font-bold shadow-lg shadow-cyan-500/10"
+            >
+              <Maximize2 className="w-3.5 h-3.5 text-cyan-400" />
+              <span>Full-Screen Lightbox View</span>
+            </button>
+          </div>
+          <div 
+            onClick={() => setShowMasterGridModal(true)}
+            className="cursor-pointer overflow-hidden relative group/img"
+          >
+            <img
+              src="/assets/robocorp25_master_grid.jpg"
+              alt="ROBOCORP 25 Master Infographic Grid"
+              className="w-full h-auto object-cover group-hover/img:scale-[1.015] transition-transform duration-500"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-20 group-hover/img:opacity-0 transition-opacity" />
+            <div className="absolute bottom-4 right-4 px-3 py-1.5 rounded-lg bg-slate-950/90 backdrop-blur-md border border-cyan-500/40 text-[11px] font-mono text-cyan-300 opacity-90 group-hover/img:opacity-100 flex items-center gap-1.5 shadow-xl">
+              <Maximize2 className="w-3.5 h-3.5" />
+              <span>Click to Expand Master 25-Robot Infographic</span>
+            </div>
+          </div>
+          <div className="p-3 bg-[#060a14] border-t border-slate-800/80 text-center font-mono text-[11px] text-slate-300 flex flex-wrap items-center justify-around gap-2">
+            <span className="text-cyan-400 font-bold">25 ROBOTS</span> · <span>25 ROLES</span> · <span>HIGHER PRODUCTIVITY</span> · <span>SAFER WORKPLACES</span> · <span>SMARTER OPERATIONS</span> · <span className="text-amber-400 font-extrabold">BUILT BY ROBOTS. FOR A BETTER TOMORROW.</span>
+          </div>
         </div>
 
         {/* 25 ROBOT 1-BY-1 SELECTOR GRID matching user reference image */}
@@ -375,6 +411,36 @@ export default function Workforce25Film() {
               >
                 Close Inspector View
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Master Grid Infographic Lightbox Modal */}
+      {showMasterGridModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/95 backdrop-blur-2xl animate-fade-in">
+          <div className="relative max-w-7xl w-full max-h-[96vh] bg-slate-950 border border-cyan-500/50 rounded-2xl overflow-hidden flex flex-col shadow-2xl">
+            <div className="p-4 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between text-xs font-mono">
+              <div className="flex items-center gap-2 text-cyan-300">
+                <Sparkles className="w-4 h-4 text-cyan-400" />
+                <span className="font-extrabold text-sm text-white">ROBOCORP 25 — MASTER 25-ROBOT INFOGRAPHIC POSTER</span>
+              </div>
+              <button
+                onClick={() => setShowMasterGridModal(false)}
+                className="px-3.5 py-1.5 rounded-lg bg-cyan-500/20 hover:bg-cyan-500 text-cyan-300 hover:text-black font-extrabold transition-all border border-cyan-500/40 text-xs"
+              >
+                ✕ CLOSE
+              </button>
+            </div>
+            <div className="overflow-auto p-2 flex-1 flex items-center justify-center bg-[#03060d]">
+              <img
+                src="/assets/robocorp25_master_grid.jpg"
+                alt="ROBOCORP 25 Master 25-Robot Infographic Grid"
+                className="w-full h-auto max-h-[85vh] object-contain rounded-lg shadow-2xl"
+              />
+            </div>
+            <div className="p-3 bg-slate-950 border-t border-slate-800 text-center font-mono text-xs text-slate-400">
+              ROBOCORP 25 · 25 ROBOTS · 25 ROLES · ONE INTELLIGENT MANUFACTURING COMPANY · BUILT BY ROBOTS. FOR A BETTER TOMORROW.
             </div>
           </div>
         </div>
