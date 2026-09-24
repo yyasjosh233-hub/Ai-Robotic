@@ -34,11 +34,11 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  // If Platform Workspace is toggled or 'industrial-ai' tab is selected, render full PlatformLayout
-  if (isPlatformOpen || activeTab === 'industrial-ai') {
+  // If Platform Workspace is toggled or 'industrial-ai' / 'ai-media-studio' tab is selected, render full PlatformLayout
+  if (isPlatformOpen || activeTab === 'industrial-ai' || activeTab === 'ai-media-studio') {
     return (
       <PlatformLayout
-        activeSubRoute={activeSubRoute}
+        activeSubRoute={activeTab === 'ai-media-studio' && !isPlatformOpen ? 'ai-media-studio' : activeSubRoute}
         onNavigateSubRoute={(route) => setActiveSubRoute(route)}
         onBackToSite={handleBackToSite}
       />

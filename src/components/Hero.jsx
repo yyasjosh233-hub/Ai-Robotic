@@ -54,20 +54,20 @@ export default function Hero({ onOpenPlatform, onExplore }) {
           {/* CTA Group */}
           <div className="pt-4 flex flex-wrap justify-center items-center gap-4">
             <button
-              onClick={onOpenPlatform}
+              onClick={() => onOpenPlatform('ai-media-studio')}
               className="px-8 py-4 rounded-xl font-semibold text-sm text-white bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 shadow-xl shadow-cyan-500/25 flex items-center gap-3 group transition-all duration-300 transform hover:-translate-y-0.5"
             >
-              <Cpu className="w-5 h-5 text-cyan-200" />
-              <span>Deploy Solutions</span>
+              <Sparkles className="w-5 h-5 text-cyan-200 animate-spin-slow" />
+              <span>EXPLORE AI MEDIA STUDIO</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
 
             <button
-              onClick={onExplore}
-              className="px-8 py-4 rounded-xl font-semibold text-sm text-slate-200 bg-slate-900/80 hover:bg-slate-800 border border-slate-700/80 backdrop-blur-md flex items-center gap-2 transition-all duration-200"
+              onClick={() => onOpenPlatform('official-promo-film')}
+              className="px-8 py-4 rounded-xl font-semibold text-sm text-slate-200 bg-slate-900/80 hover:bg-slate-800 border border-cyan-500/40 backdrop-blur-md flex items-center gap-2 transition-all duration-200"
             >
               <Bot className="w-4 h-4 text-cyan-400" />
-              <span>Explore Offerings</span>
+              <span>WATCH AI PROMOTIONAL FILM</span>
             </button>
           </div>
         </div>

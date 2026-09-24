@@ -16,6 +16,7 @@ export default function Header({ activeTab, setActiveTab, onOpenCrest, onOpenPla
   const navLinks = [
     { id: 'home', label: 'Home' },
     { id: 'workforce-film', label: '25-Robot Film' },
+    { id: 'ai-media-studio', label: '🎬 AI Media Studio' },
     { id: 'about', label: 'About' },
     { id: 'services', label: 'Services' },
     { id: 'illustrations', label: 'Illustrations' },
