@@ -28,3 +28,9 @@ build/
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Python cache
+__pycache__/
+*.pyc
+.pytest_cache/
+

@@ -28,17 +28,17 @@ from simulation.scenario_runner import SimulationScenarioRunner
 
 # --- PAI-IR v2.0 FRONTIER PHYSICAL AI EXTENSIONS ---
 from ai.world_model_v2 import WorldModelV2
-from ai.predictive_world_model import PredictiveWorldModel
-from active_perception.active_perception_engine import ActivePerceptionEngine
+from ai.predictive_world_model import PredictiveWorldModel, predictive_world_model_engine
+from active_perception.active_perception_engine import ActivePerceptionEngine, active_perception_engine
 from ai.uncertainty_engine import UncertaintyEngine
 from robot_learning.policy_engine import PolicyEngine
 from skills.skill_library import SkillLibrary
 from skills.skill_discovery import AutonomousSkillDiscovery
 from learning_from_demonstration.lfd_manager import LfDManager
-from simulation.sim_to_real import SimToRealEngine
-from data_engine.data_generator import AutonomousDataGenerator
-from tactile.tactile_sensor import TactileSensor
-from control.whole_body_controller import WholeBodyController
+from simulation.sim_to_real import SimToRealEngine, sim_to_real_engine
+from data_engine.data_generator import AutonomousDataGenerator, synthetic_data_generator
+from tactile.tactile_sensor import TactileSensor, tactile_ai_engine
+from control.whole_body_controller import WholeBodyController, whole_body_controller_engine
 from navigation.predictive_collision import PredictiveCollisionIntelligence
 from learning.continual_learning import ContinualLearningManager
 from ai.autonomous_recovery import AutonomousRecoverySystem
@@ -47,6 +47,19 @@ from charging.energy_manager import EnergyManager, AutonomousChargingSystem
 from fleet.fleet_coordinator import FleetCoordinator
 from robot_knowledge.knowledge_transfer import RobotKnowledgeTransfer
 from learning.federated_learning import FederatedRobotLearning
+
+# --- 2026 PHYSICAL AI 12-TECH STACK IMPORTS ---
+from ai.vla_model import vla_engine
+from navigation.spatial_4d import spatial_4d_engine
+from learning.cross_robot_learning import cross_robot_learning_engine
+from ai.edge_ai_engine import edge_ai_engine
+from fleet.multi_agent_brain import multi_agent_company_brain
+from ai.robot_memory import robot_memory_system
+
+# --- NEURALINK BRAIN-MACHINE INTERFACE (BCI / BMI) IMPORTS ---
+from bci.neuralink_engine import neuralink_bmi_engine
+
+
 
 # --- CRITIC-RAG MEDICAL EVIDENCE VERIFICATION ENGINE IMPORTS ---
 import sys, os
@@ -274,17 +287,48 @@ def handle_voice_command(req: VoiceCommandRequest):
         "dialogue": hri_manager.get_history()
     }
 
+class GestureRequest(BaseModel):
+    gesture_name: Optional[str] = "WAVE"
+    command: Optional[str] = ""
+
 @app.post("/api/hri/gesture")
-def handle_gesture(gesture_name: str = "POINT"):
+def handle_gesture(req: GestureRequest = None, gesture_name: Optional[str] = None):
+    target_gesture = (req.gesture_name if req and req.gesture_name else gesture_name) or "WAVE"
     keypoints = pose_estimator.estimate_pose()
-    gesture_info = gesture_engine.detect_gesture(keypoints)
+    
+    if target_gesture.upper() == "WAVE":
+        robot_response = "Gesture 'WAVE' detected 👋! Robot R08 is waving back to human operator! Executing arm wave trajectory (Wrist Roll: ±35° @ 2.0 Hz, Shoulder Pitch: +20°)."
+        wave_trajectory = {
+            "joint_oscillation_hz": 2.0,
+            "wrist_roll_amplitude_deg": 35.0,
+            "shoulder_pitch_deg": 20.0,
+            "wave_status": "WAVING_BACK_ACTIVE",
+            "greeting_dialogue": "Hello Operator! Robot R08 online and standing by."
+        }
+    elif target_gesture.upper() == "STOP":
+        robot_response = "Gesture 'STOP' detected ✋! Triggering Emergency Safe Stop interlock. Decelerating motors @ 1.5 m/s²."
+        wave_trajectory = {"wave_status": "STOP_INTERLOCK_ACTIVE"}
+    elif target_gesture.upper() == "GRASP":
+        robot_response = "Gesture 'GRASP' detected ✊! Closing 5-finger end-effector to 45.0mm span with 18.5N tactile force feedback."
+        wave_trajectory = {"wave_status": "TACTILE_GRASP_ACTIVE"}
+    elif target_gesture.upper() == "THUMBS_UP":
+        robot_response = "Gesture 'THUMBS_UP' detected 👍! Operator task confirmation acknowledged. Mission status marked as COMPLETED."
+        wave_trajectory = {"wave_status": "CONFIRMATION_ACKNOWLEDGED"}
+    else:
+        robot_response = f"Gesture 'POINT' detected 👈! Pointing Ray Solver calculated 3D target coordinates [2.45, 1.10, 0.85] matching precision component B-14."
+        wave_trajectory = {"wave_status": "POINTING_RAY_ACTIVE"}
+
     pointing_ray = pointing_ray_solver.calculate_pointing_ray((0.4, 0.2, 1.2), (0.6, 0.4, 1.2))
 
     return {
-        "detected_gesture": gesture_info,
+        "status": "SUCCESS",
+        "detected_gesture": target_gesture.upper(),
+        "robot_response": robot_response,
+        "wave_trajectory": wave_trajectory,
         "keypoints": keypoints,
         "pointing_ray_3d": pointing_ray
     }
+
 
 @app.post("/api/navigation/go")
 def navigate_to_target(req: NavRequest):
@@ -449,6 +493,116 @@ def generate_data_batch(count: int = 5):
 @app.post("/api/v2/recovery/diagnose")
 def run_recovery_diagnosis(failure_type: str = "GRASP_FAILED"):
     return recovery_system.diagnose_and_recover(failure_type)
+
+# --- 2026 PHYSICAL AI 12-TECH STACK ENDPOINTS ---
+
+class VLAInstructionRequest(BaseModel):
+    prompt: str = "Pick the red component and place it on the assembly station"
+
+@app.post("/api/v2/vla/process")
+def process_vla_command(req: VLAInstructionRequest):
+    return vla_engine.process_instruction(req.prompt)
+
+@app.get("/api/v2/world-model/100-rollouts")
+def run_world_model_100_rollouts(goal: str = "Pick & Place Precision Gear"):
+    return predictive_world_model_engine.simulate_action_rollouts(world_model_v2.get_full_state(), goal)
+
+@app.get("/api/v2/tactile/full-touch")
+def read_full_tactile_touch():
+    return tactile_ai_engine.process_tactile_feedback()
+
+@app.get("/api/v2/spatial-4d")
+def get_spatial_4d_tracking():
+    return spatial_4d_engine.track_spatiotemporal_environment()
+
+@app.get("/api/v2/cross-robot-learning")
+def get_cross_robot_learning():
+    return cross_robot_learning_engine.get_shared_knowledge()
+
+@app.post("/api/v2/cross-robot-learning/broadcast")
+def broadcast_skill_transfer(source_robot: str = "R08", skill: str = "Compliant Gear Insertion"):
+    return cross_robot_learning_engine.record_and_broadcast_skill(source_robot, skill, {})
+
+@app.get("/api/v2/sim-to-real/closed-loop")
+def get_sim_to_real_closed_loop():
+    return sim_to_real_engine.execute_closed_loop_cycle()
+
+@app.post("/api/v2/synthetic-data/generate-categories")
+def generate_synthetic_categories(count: int = 8, category: Optional[str] = None):
+    return synthetic_data_generator.generate_synthetic_batch(count, category)
+
+@app.get("/api/v2/edge-ai")
+def get_edge_ai_telemetry():
+    return edge_ai_engine.evaluate_edge_inference()
+
+@app.post("/api/v2/active-perception/viewpoint-shift")
+def shift_active_perception_viewpoint(component: str = "precision_gear_17", initial_confidence: float = 0.62):
+    return active_perception_engine.evaluate_and_reobserve(component, initial_confidence)
+
+@app.get("/api/v2/multi-agent-brain")
+def get_multi_agent_brain_status():
+    return multi_agent_company_brain.get_company_overview()
+
+@app.post("/api/v2/multi-agent-brain/negotiate")
+def negotiate_multi_agent_task(requesting_robot: str = "R08", resource: str = "Gear Component C-14"):
+    return multi_agent_company_brain.negotiate_task_request(requesting_robot, resource)
+
+@app.get("/api/v2/robot-memory")
+def get_robot_memory(robot_id: str = "R08"):
+    return robot_memory_system.recall_memory_context()
+
+@app.get("/api/v2/whole-body-control/humanoid")
+def get_whole_body_humanoid_control():
+    return whole_body_controller_engine.compute_whole_body_action()
+
+@app.get("/api/v2/physical-ai/12-tech-stack")
+def get_12_tech_stack_summary():
+    return {
+        "title": "ROBOCORP 25 — 2026 Physical AI 12-Tech Stack & BCI Integration",
+        "timestamp": datetime.utcnow().isoformat(),
+        "technologies": [
+            {"id": "vla", "title": "Vision-Language-Action (VLA)", "status": "ONLINE", "data": vla_engine.process_instruction("Pick the red component and place it on assembly station")},
+            {"id": "world_model", "title": "Predictive World Model (100 Rollouts)", "status": "ACTIVE", "data": predictive_world_model_engine.simulate_action_rollouts({})},
+            {"id": "tactile", "title": "Tactile AI & Robot Touch", "status": "ONLINE", "data": tactile_ai_engine.process_tactile_feedback()},
+            {"id": "spatial_4d", "title": "4D Spatial Intelligence (X,Y,Z + Time)", "status": "ACTIVE", "data": spatial_4d_engine.track_spatiotemporal_environment()},
+            {"id": "cross_robot", "title": "Cross-Robot Learning & Skill Transfer", "status": "SYNCED", "data": cross_robot_learning_engine.get_shared_knowledge()},
+            {"id": "sim_to_real", "title": "Real-to-Sim-to-Real Closed Loop", "status": "LOOPING", "data": sim_to_real_engine.execute_closed_loop_cycle()},
+            {"id": "synthetic_data", "title": "Synthetic Data Generator (8 Failure Modes)", "status": "READY", "data": synthetic_data_generator.generate_synthetic_batch(2)},
+            {"id": "edge_ai", "title": "On-Device / Edge AI Compute (<5ms Latency)", "status": "HARDWARE_ACCELERATED", "data": edge_ai_engine.evaluate_edge_inference()},
+            {"id": "active_perception", "title": "Active Perception (62% -> 97% Shift)", "status": "ACTIVE", "data": active_perception_engine.evaluate_and_reobserve("precision_gear_17", 0.62)},
+            {"id": "multi_agent", "title": "Multi-Agent Robot Company Brain (25 Robots)", "status": "COORDINATING", "data": multi_agent_company_brain.get_company_overview()},
+            {"id": "robot_memory", "title": "Dual-Layer Short & Long-Term Memory", "status": "ACTIVE", "data": robot_memory_system.recall_memory_context()},
+            {"id": "whole_body", "title": "Whole-Body Humanoid Controller (32-DOF)", "status": "STABLE", "data": whole_body_controller_engine.compute_whole_body_action()}
+        ]
+    }
+
+# --- NEURALINK BRAIN CHIP (BMI / BCI) REST ENDPOINTS ---
+
+class NeuralDecodeRequest(BaseModel):
+    thought_command: str = "Imagine Moving Arm Right"
+
+@app.get("/api/v2/bci/neuralink/status")
+def get_neuralink_status():
+    return neuralink_bmi_engine.read_neural_telemetry()
+
+@app.post("/api/v2/bci/neuralink/decode")
+def decode_neural_thought(req: NeuralDecodeRequest):
+    return neuralink_bmi_engine.decode_neural_intent(req.thought_command)
+
+@app.post("/api/v2/bci/neuralink/surgical-implant")
+def run_surgical_implant_simulation():
+    return neuralink_bmi_engine.simulate_surgical_robot_implantation()
+
+@app.get("/api/v2/bci/neuralink/trials")
+def get_neuralink_trials():
+    return neuralink_bmi_engine.get_subject_trials_registry()
+
+@app.get("/api/v2/bci/neuralink/brain-regions")
+def get_brain_regions():
+    return neuralink_bmi_engine.get_brain_regions_map()
+
+
+
 
 @app.websocket("/ws/telemetry")
 async def websocket_endpoint(websocket: WebSocket):

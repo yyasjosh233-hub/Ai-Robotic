@@ -21,9 +21,9 @@ import RoboticsKnowledgeTools from './platform/RoboticsKnowledgeTools'
 import PAI_IR_Platform from './pai_ir/PAI_IR_Platform'
 import CriticRagDashboard from './critic_rag/CriticRagDashboard'
 import AIMediaStudio from './platform/AIMediaStudio'
-import AIFactoryStoryteller from './platform/AIFactoryStoryteller'
 import AIRobotCommandCenter from './platform/AIRobotCommandCenter'
-
+import PhysicalAIRoboticsStudio from './platform/PhysicalAIRoboticsStudio'
+import FlagshipDemo from './platform/FlagshipDemo'
 
 export default function PlatformLayout({ activeSubRoute, onNavigateSubRoute, onBackToSite }) {
   const [activeWorkspace, setActiveWorkspace] = useState('agro_r1')
@@ -40,8 +40,9 @@ export default function PlatformLayout({ activeSubRoute, onNavigateSubRoute, onB
 
   // Industrial AI Platform Sub-items
   const industrialItems = [
+    { id: 'flagship-demo', label: '🏆 Flagship Demo: AI Manufactures a Product', icon: '🏭' },
+    { id: 'physical-ai-studio', label: '🤖 2026 Physical AI Studio (12 Tech Stack)', icon: '🧠' },
     { id: 'ai-media-studio', label: '🎬 AI Media & Publicity Studio', icon: '✨' },
-    { id: 'ai-storyteller', label: '📖 AI Factory Storyteller ("Explain")', icon: '🎙️' },
     { id: 'ai-commands', label: '⚡ Natural Language AI Commands', icon: '🎮' },
     { id: 'critic-rag', label: 'CRITIC-RAG Medical Evidence', icon: '⚡' },
     { id: 'pai-ir', label: 'PAI-IR Command Center', icon: '⚡' },
@@ -102,10 +103,12 @@ export default function PlatformLayout({ activeSubRoute, onNavigateSubRoute, onB
 
   const renderSubView = () => {
     switch (activeSubRoute) {
+      case 'flagship-demo':
+        return <FlagshipDemo />
+      case 'physical-ai-studio':
+        return <PhysicalAIRoboticsStudio />
       case 'ai-media-studio':
         return <AIMediaStudio />
-      case 'ai-storyteller':
-        return <AIFactoryStoryteller />
       case 'ai-commands':
         return <AIRobotCommandCenter />
       case 'critic-rag':

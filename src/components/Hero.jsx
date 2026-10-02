@@ -42,32 +42,35 @@ export default function Hero({ onOpenPlatform, onExplore }) {
 
         {/* Headline */}
         <div className="text-center max-w-4xl mx-auto space-y-6">
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.1]">
-            Architects of Machine Intelligence <br />
-            <span className="gradient-text">Robotics That Think & Adapt</span>
+          <div className="text-xs font-mono text-cyan-400 font-bold tracking-widest uppercase">
+            ROBOCORP 25 ARCHITECTURE
+          </div>
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.1] uppercase">
+            ROBOCORP 25 <br />
+            <span className="gradient-text text-3xl sm:text-5xl lg:text-6xl">25 ROBOTS. 25 ROLES. ONE INTELLIGENT FACTORY.</span>
           </h1>
 
           <p className="text-slate-300 text-base sm:text-xl max-w-2xl mx-auto leading-relaxed">
-            Empowering global manufacturing with intelligent automation ecosystems that merge AI-cognitive brilliance with mechanical perfection.
+            Autonomous Physical AI Manufacturing Ecosystem merging foundation vision-language models, tactile intelligence, 4D spatial twin, and multi-robot coordination.
           </p>
 
           {/* CTA Group */}
           <div className="pt-4 flex flex-wrap justify-center items-center gap-4">
             <button
-              onClick={() => onOpenPlatform('ai-media-studio')}
-              className="px-8 py-4 rounded-xl font-semibold text-sm text-white bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 shadow-xl shadow-cyan-500/25 flex items-center gap-3 group transition-all duration-300 transform hover:-translate-y-0.5"
+              onClick={() => onOpenPlatform('flagship-demo')}
+              className="px-8 py-4 rounded-xl font-extrabold text-sm text-black bg-gradient-to-r from-cyan-400 via-sky-400 to-emerald-400 hover:opacity-90 shadow-xl shadow-cyan-500/25 flex items-center gap-3 group transition-all duration-300 transform hover:-translate-y-0.5 uppercase tracking-wider"
             >
-              <Sparkles className="w-5 h-5 text-cyan-200 animate-spin-slow" />
-              <span>EXPLORE AI MEDIA STUDIO</span>
+              <Zap className="w-5 h-5 fill-black" />
+              <span>EXPLORE FACTORY</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
 
             <button
-              onClick={() => onOpenPlatform('official-promo-film')}
-              className="px-8 py-4 rounded-xl font-semibold text-sm text-slate-200 bg-slate-900/80 hover:bg-slate-800 border border-cyan-500/40 backdrop-blur-md flex items-center gap-2 transition-all duration-200"
+              onClick={() => onOpenPlatform('flagship-demo')}
+              className="px-8 py-4 rounded-xl font-bold text-sm text-slate-200 bg-slate-900/90 hover:bg-slate-800 border border-cyan-500/40 backdrop-blur-md flex items-center gap-2 transition-all duration-200 uppercase tracking-wider"
             >
               <Bot className="w-4 h-4 text-cyan-400" />
-              <span>WATCH AI PROMOTIONAL FILM</span>
+              <span>WATCH AI DEMO</span>
             </button>
           </div>
         </div>
